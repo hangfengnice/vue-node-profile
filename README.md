@@ -13,3 +13,7 @@ npm i
 
 npm run serve
 ```
+
+## 项目预览
+
+[请戳这里👇](https://hangfengnice.github.io/vue-user-management/dist/)
