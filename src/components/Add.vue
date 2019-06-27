@@ -70,8 +70,8 @@ export default {
           name:this.customer.name,
           phone: this.customer.phone,
           email: this.customer.email,
-          education: this.customer.education,
-          graduationschool: this.customer.graduationschool,
+          address: this.customer.address,
+          company: this.customer.company,
           profession: this.customer.profession,
           profile: this.customer.profile
         }
