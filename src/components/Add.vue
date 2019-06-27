@@ -26,14 +26,14 @@
          placeholder="education" v-model='customer.education'>
        </div>
        <div class="form-group">
-         <label >毕业学校</label>
+         <label >address(地址)</label>
          <input type="text" class="form-control"
-         placeholder="graduationschool" v-model='customer.graduationschool'>
+         placeholder="address" v-model='customer.address'>
        </div>
        <div class="form-group">
-         <label >职业</label>
+         <label >company(公司)</label>
          <input type="text" class="form-control"
-         placeholder="profession" v-model='customer.profession'>
+         placeholder="company" v-model='customer.company'>
        </div>
        <div class="form-group">
          <label >个人简介</label>

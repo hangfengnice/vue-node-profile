@@ -1,6 +1,6 @@
 <template>
   <div class="about container">
-    <h1 class='page-header'></h1>
+    <h1 class='page-header'>hello nice to meet you @_@</h1>
   </div>
 </template>
 

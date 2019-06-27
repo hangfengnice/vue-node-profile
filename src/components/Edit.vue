@@ -67,7 +67,7 @@ export default {
       })
     },
     updateCustomer (e){
-      console.log(123)
+
       e.preventDefault();
       if(!this.customer.name || !this.customer.phone || !this.customer.email){
         this.alert = "请输入对应的信息"
@@ -81,7 +81,7 @@ export default {
           profession: this.customer.profession,
           profile: this.customer.profile
         }
-        this.$http.put('https://localhost:3000/user/'+ this.$route.params.id,updateCustomer)
+        this.$http.patch('https://jsonplaceholder.typicode.com/users/'+ this.$route.params.id,updateCustomer)
         .then((res) => {
           this.$router.push({path:'/',query:{alert:'用户信息跟新成功'}})
         })

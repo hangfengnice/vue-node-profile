@@ -1,7 +1,7 @@
 <template>
   <div class="details container">
     <router-link to='/' class='btn btn-success'>返回首页</router-link>
-    <h1 class="page-header">{{customer.name}}
+    <h1 class="page-header">详细信息
       <span class='pull-right'>
         <router-link class='btn btn-primary' :to='"/edit/"+customer.id'>
         编辑
@@ -11,25 +11,25 @@
     </h1>
     <ul class="list-group">
       <li class="list-group-item">
-        <span class="glyphicon glyphicon-phone-alt">{{customer.phone}}</span>
+        <span class=" glyphicon glyphicon-phone-alt">{{customer.phone}}</span>
       </li>
       <li class="list-group-item">
-        <span class="glyphicon glyphicon-envelope">{{customer.email}}</span>
+        <span class=" glyphicon glyphicon-envelope">{{customer.email}}</span>
       </li>
       <li class="list-group-item">
-        <span class="glyphicon glyphicon-phone-alt">{{customer.education}}</span>
+        <span class=" glyphicon glyphicon-wrench">{{customer.education}}</span>
       </li>
       <li class="list-group-item">
-        <span class="glyphicon glyphicon-envelope">{{customer.graduationschool}}</span>
+        <span class=" glyphicon glyphicon-home">{{customer.address}}</span>
       </li>
       <li class="list-group-item">
-        <span class="glyphicon glyphicon-phone-alt">{{customer.name}}</span>
+        <span class=" glyphicon glyphicon-user">{{customer.name}}</span>
       </li>
       <li class="list-group-item">
-        <span class="glyphicon glyphicon-envelope">{{customer.profile}}</span>
+        <span class=" glyphicon glyphicon-envelope">{{customer.profile}}</span>
       </li>
       <li class="list-group-item">
-        <span class="glyphicon glyphicon-envelope">{{customer.profession}}</span>
+        <span class=" glyphicon glyphicon-education">{{customer.profession}}</span>
       </li>
     </ul>
   </div>
@@ -40,14 +40,23 @@ export default {
   name: "customersdetails",
   data() {
     return {
-      customer: ""
+      customer: {}
     };
   },
   methods: {
     fetchCustomers(id) {
       this.$http.get("https://jsonplaceholder.typicode.com/users/" + id).then(res => {
         // console.log(res);
-        this.customer = res.data;
+       this.customer = {
+          name:res.data.name,
+          phone: res.data.phone,
+          email: res.data.email,
+          address: res.data.address.street,
+          company: res.data.company.name,
+          profession: res.data.profession,
+          profile: res.data.profile,
+          id: res.data.id
+        }
       });
     },
     deleteCustomer(id){
@@ -58,6 +67,7 @@ export default {
     }
   },
   created() {
+    console.log(this.$route.params.id)
     this.fetchCustomers(this.$route.params.id);
   }
 };
