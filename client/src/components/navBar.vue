@@ -20,15 +20,15 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-show="!isLogin">
             <router-link class="nav-link" to="/register">注册</router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-show="!isLogin">
             <router-link class="nav-link" to="/login">登录</router-link>
           </li>
-          <li class="nav-item">
-            <a @click.prevent="logout" class="nav-link" to="/login">
-              <img class="rounded-circle headerImg" />
+          <li class="nav-item" v-show="isLogin">
+            <a @click.prevent="logOut" class="nav-link" to="/login">
+              <img :src="user.avatar" :alt="user.name" class="rounded-circle headerImg" />
               退出
             </a>
           </li>
@@ -43,9 +43,33 @@ export default {
   name: "navBar",
   data() {
     return {};
+  },
+  computed: {
+    isLogin() {
+      if (this.$store.getters.isAuthenticated) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    user() {
+      return this.$store.getters.user;
+    }
+  },
+  methods: {
+    logOut() {
+      localStorage.removeItem("jetToken");
+      this.$store.dispatch("setIsAuthenticated", false);
+      this.$store.dispatch("setUser", {});
+      this.$router.push("/login");
+    }
   }
 };
 </script>
 
 <style lang='scss' scoped>
+.headerImg {
+  width: 30px;
+  margin-right: 5px;
+}
 </style>

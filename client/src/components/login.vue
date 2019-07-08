@@ -30,7 +30,8 @@
 </template>
 
 <script>
-import TextField from './common/textFiledGroup'
+import TextField from "./common/textFiledGroup";
+import jwt_decode from "jwt-decode";
 export default {
   name: "login",
   data() {
@@ -46,7 +47,31 @@ export default {
     TextField
   },
   methods: {
-    submit() {}
+    submit() {
+      this.$axios
+        .post("/api/login", this.user)
+        .then(res => {
+          // console.log(res.data)
+          const { token } = res.data;
+          window.localStorage.setItem("jwtToken", token);
+          const decoded = jwt_decode(token);
+          // console.log(decoded);
+          this.$store.dispatch("setIsAuthenticated", !this.isEmpty(decoded));
+          this.$store.dispatch("setUser", decoded);
+          this.$router.push('/dashboard')
+        })
+        .catch(err => {
+          this.errors = err.response.data;
+        });
+    },
+    isEmpty: value => {
+      return (
+        value === undefined ||
+        value === null ||
+        (typeof value === "object" && Object.keys(value).length === 0) ||
+        (typeof value === "string" && value.trim().length === 0)
+      );
+    }
   }
 };
 </script>

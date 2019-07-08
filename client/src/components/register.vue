@@ -64,9 +64,13 @@ export default {
   },
   methods: {
     submit() {
+      console.log(this.$store.getters.isAuthenticated);
       this.$axios.post("/api/register", this.newUser).then(
         res => {
           console.log(res.data);
+          // this.$store.dispatch('setUser',res.data)
+          this.errors = {};
+          this.$router.push("/login");
         },
         err => {
           if (err.response.data) {
