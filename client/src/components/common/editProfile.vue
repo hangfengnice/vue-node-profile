@@ -4,8 +4,7 @@
         <div class="row">
             <div class="col-md-8 m-auto">
                 <a class="btn btn-light" @click.prevent="$router.go(-1)">返回</a>
-                <h1 class="display-4 text-center">创建个人资料</h1>
-                <p class="lead text-center">填写您的个人资料, 让我们更多的了解你!</p>
+                <h1 class="display-4 text-center">编辑个人资料</h1>
                 <small class="d-block pb-3">* 表示必填项</small>
                
                <!-- form表单 -->
@@ -51,7 +50,7 @@
                   placeholder="位置"
                   v-model="msgInfo.location"
                   :error='errors.location'
-                  info='你所在的城市及所在区 (例如. 杭州市江干区)'
+                  info='你所在的城市及所在区 (例如. 北京市昌平区)'
                 ></TextField>
 
                 <TextField 
@@ -60,7 +59,7 @@
                   placeholder="* 编程语言技能"
                   v-model="msgInfo.skills"
                   :error='errors.skills'
-                  info='请使用逗号隔开你所掌握的语言 (例如: JavaScript, Node, Vue)'
+                  info='请使用逗号隔开你所掌握的语言 (例如: HTML,CSS,JavaScript,PHP)'
                 ></TextField>
 
                 <TextField 
@@ -118,7 +117,7 @@
                  ></InputGroup>
                </div>
 
-                 <input type="submit" value='submit' class="btn btn-success btn-block mt-4">
+                 <input type="submit" class="btn btn-info btn-block mt-4">
                </form>
             </div>
         </div>
@@ -127,12 +126,12 @@
 </template>
 
 <script>
-import TextField from './common/textFiledGroup';
-import TextArea from './common/textAreaGroup';
-import SelectList from './common/selectListGroup';
-import InputGroup from './common/inputGroup';
+import TextField from './textFiledGroup';
+import TextArea from './textAreaGroup';
+import SelectList from './selectListGroup';
+import InputGroup from './inputGroup';
 export default {
-  name: 'create-profile',
+  name: 'edit-profile',
   data() {
     return {
       msgInfo: {
@@ -169,9 +168,40 @@ export default {
     SelectList,
     InputGroup
   },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+    //   console.log(vm)
+    //  let profile =  vm.$store.getters.profile
+    //  vm.msgInfo = profile
+    vm.getCurrentProfile()
+
+    });
+  },
   methods: {
+    getCurrentProfile() {
+      let profile = this.$store.getters.profile;
+      profile.company = profile.company ? profile.company : '';
+      profile.website = profile.website ? profile.website : '';
+      profile.location = profile.location ? profile.company : '';
+      profile.githubusername = profile.githubusername
+        ? profile.githubusername
+        : '';
+      profile.bio = profile.bio ? profile.bio : '';
+
+      profile.social = profile.social ? profile.social : {};
+      profile.wechat = profile.social.wechat ? profile.social.wechat : '';
+      profile.QQ = profile.social.QQ ? profile.social.QQ : '';
+      profile.tengxunkt = profile.social.tengxunkt
+        ? profile.social.tengxunkt
+        : '';
+      profile.wangyikt = profile.social.wangyikt ? profile.social.wangyikt : '';
+
+      profile.skills = profile.skills.length ? profile.skills.join(',') : '';
+
+      this.msgInfo = profile;
+      // console.log(this.msgInfo);
+    },
     submit() {
-      // console.log(this.msgInfo)
       this.$axios
         .post('/api/profile', this.msgInfo)
         .then(res => {

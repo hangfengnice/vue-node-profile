@@ -5,6 +5,10 @@ import Login from './components/login.vue'
 import Register from './components/register.vue'
 import Dashboard from './components/dashboard.vue'
 import CreateProfile from './components/createProfile.vue'
+import EditProfile from './components/common/editProfile.vue'
+import AddExperience from './components/addExperience.vue'
+import AddEducation from './components/addEducation.vue'
+
 
 
 Vue.use(Router)
@@ -19,6 +23,12 @@ const router =  new Router({
    {path: '/register', component: Register},
    {path: '/dashboard', component: Dashboard},
    {path: '/createprofile', component: CreateProfile},
+   {path: '/edit-profile', component: EditProfile},
+   {path: '/add-experience', component: AddExperience},
+   {path: '/add-education', component: AddEducation},
+
+
+
 
 
   ]
