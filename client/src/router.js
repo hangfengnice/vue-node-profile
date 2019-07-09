@@ -8,6 +8,9 @@ import CreateProfile from './components/createProfile.vue'
 import EditProfile from './components/common/editProfile.vue'
 import AddExperience from './components/addExperience.vue'
 import AddEducation from './components/addEducation.vue'
+import Profiles from './components/profile.vue'
+import Profile from './components/profile/profile.vue'
+
 
 
 
@@ -26,8 +29,8 @@ const router =  new Router({
    {path: '/edit-profile', component: EditProfile},
    {path: '/add-experience', component: AddExperience},
    {path: '/add-education', component: AddEducation},
-
-
+   {path: '/profiles', component: Profiles},
+   {path: '/profile/:handle', component: Profile},
 
 
 
@@ -37,7 +40,7 @@ const router =  new Router({
 router.beforeEach((to, from, next) => {
   // 获取token
   const isLogin = localStorage.jwtToken ? true : false
-  if(to.path == '/login' || to.path == '/register') next()
+  if(to.path == '/login' || to.path == '/register' || to.path == '/' || to.path == '/profiles') next()
   else{
      isLogin ? next() : next('/login')
   }

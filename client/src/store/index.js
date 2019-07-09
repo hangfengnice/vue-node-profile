@@ -12,7 +12,8 @@ const state = {
   isAuthenticated: false,
   user: {},
   profile: {},
-  loading: false
+  loading: false,
+  proiles: []
 }
 
 export default new Vuex.Store({
