@@ -6,8 +6,8 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
-    "start": "node server.js",
-    "server": "nodemon server.js",
+    "start": "nodemon server.js",
+    "server": "node server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "米斯特吴",

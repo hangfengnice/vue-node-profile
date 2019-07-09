@@ -3,18 +3,34 @@ import Router from 'vue-router'
 import Landing from './components/landing.vue'
 import Login from './components/login.vue'
 import Register from './components/register.vue'
+import Dashboard from './components/dashboard.vue'
+import CreateProfile from './components/createProfile.vue'
 
 
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
    {path: "*", redirect: "/"},
    {path: '/', component: Landing},
    {path: '/login', component: Login},
-   {path: '/register', component: Register}
+   {path: '/register', component: Register},
+   {path: '/dashboard', component: Dashboard},
+   {path: '/createprofile', component: CreateProfile},
+
 
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  // 获取token
+  const isLogin = localStorage.jwtToken ? true : false
+  if(to.path == '/login' || to.path == '/register') next()
+  else{
+     isLogin ? next() : next('/login')
+  }
+})
+
+export default router

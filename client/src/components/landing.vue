@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h1 class="display-3 mb-4">米修在线</h1>
+            <h1 class="display-3 mb-4">码农光荣</h1>
             <p class="lead">多写,多看</p>
             <hr />
             <router-link v-show='!isLogin' to="/register" class="btn btn-lg btn-info mr-2">注册</router-link>

@@ -10,7 +10,9 @@ Vue.use(Vuex)
 
 const state = {
   isAuthenticated: false,
-  user: {}
+  user: {},
+  profile: {},
+  loading: false
 }
 
 export default new Vuex.Store({

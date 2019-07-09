@@ -5,3 +5,11 @@ export const setIsAuthenticated = (state, data) => {
 export const setUser = (state, data) => {
   state.user = data
 }
+
+export const setProfile = (state, data) => {
+  state.profile = data
+}
+
+export const setLoading= (state, data) => {
+  state.loading = data
+}

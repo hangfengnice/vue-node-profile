@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
     <div class="container">
-      <router-link class="navbar-brand" to="/">米修在线</router-link>
+      <router-link class="navbar-brand" to="/">码农光荣</router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -26,7 +26,7 @@
           <li class="nav-item" v-show="!isLogin">
             <router-link class="nav-link" to="/login">登录</router-link>
           </li>
-          <li class="nav-item" v-show="isLogin">
+          <li class="nav-item" v-if='user !== null' v-show="isLogin">
             <a @click.prevent="logOut" class="nav-link" to="/login">
               <img :src="user.avatar" :alt="user.name" class="rounded-circle headerImg" />
               退出
@@ -58,9 +58,10 @@ export default {
   },
   methods: {
     logOut() {
-      localStorage.removeItem("jetToken");
-      this.$store.dispatch("setIsAuthenticated", false);
-      this.$store.dispatch("setUser", {});
+      localStorage.removeItem("jwtToken");
+      // this.$store.dispatch("setIsAuthenticated", false);
+      // this.$store.dispatch("setUser", {});
+      this.$store.dispatch('clearCurrentState')
       this.$router.push("/login");
     }
   }
