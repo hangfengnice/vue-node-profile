@@ -42,7 +42,7 @@ require("./config/passport")(passport);
 // 使用routes
 app.use(users);
 app.use("/profile", profile);
-app.use("/post", posts);
+app.use("/posts", posts);
 
 // 访问打包的文件
 if (process.env.NODE_ENV === "production") {
