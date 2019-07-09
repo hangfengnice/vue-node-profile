@@ -10,7 +10,7 @@
     "server": "node server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "author": "米斯特吴",
+  "author": "航锋",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
