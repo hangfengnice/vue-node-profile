@@ -14,10 +14,10 @@
             <ProfileActived />
 
             <!-- 展示个人经历 -->
-            <!-- <Experience @deleteExperience="deleteExperience" :experience="profile.experience"/> -->
+            <Experience @deleteExperience="deleteExperience" :experience="profile.experience"/>
 
             <!-- 展示教育经历 -->
-            <!-- <Education @deleteEducation="deleteEducation" :education="profile.education"/> -->
+            <Education @deleteEducation="deleteEducation" :education="profile.education"/>
 
             <!-- 删除账户按钮 -->
             <div style="margin-bottom: 60px">
@@ -36,6 +36,8 @@
 
 <script>
 import ProfileActived from "./common/profileActive";
+import Experience from './common/experience'
+import Education from './common/education'
 export default {
   name: "dashboard",
   data() {
@@ -44,7 +46,9 @@ export default {
     };
   },
   components: {
-    ProfileActived
+    ProfileActived,
+    Experience,
+    Education
   },
   computed: {
     user() {
@@ -76,6 +80,28 @@ export default {
           this.$router.push("/login");
         })
         .catch(err => console.log(err));
+    },
+    deleteExperience(id){
+       this.$axios
+        .delete(`api/profile/experience/${id}`)
+        .then(res => {
+          // console.log(res.data);
+          this.profile = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    deleteEducation(id){
+      this.$axios
+        .delete(`api/profile/education/${id}`)
+        .then(res => {
+          // console.log(res.data);
+          this.profile = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   created() {
